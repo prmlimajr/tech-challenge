@@ -12,9 +12,7 @@ const commitReducer = (state = initialState, action) => {
         ...state,
         commits: Object.values(action.payload),
       };
-    case types.CREATE_REPOSITORY_SUCCESS: {
-      return {...state, successMessage: action.payload.successMessage};
-    }
+
     default:
       return state;
   }

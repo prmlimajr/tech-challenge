@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import * as commitAPI from '../api/CommitAPI';
+import * as repositoryAPI from '../api/RepositoryAPI';
 import Form from '../components/RepoCreateForm';
 
 class RepoCreateContainer extends React.Component {
@@ -9,12 +9,12 @@ class RepoCreateContainer extends React.Component {
     const token = document.getElementById('main').dataset.csrftoken;
     const name = values.name.split('/')[1];
     const v = {...values, name};
-    return commitAPI.createRepository(v, {'X-CSRFToken': token}, dispatch);
+    return repositoryAPI.createRepository(v, {'X-CSRFToken': token}, dispatch);
   };
 
   render() {
-    const {successMessage} = this.props;
-    return <Form onSubmit={this.submit} successMessage={successMessage} />;
+    const {successMessage } = this.props;
+    return <Form onSubmit={this.submit} successMessage={successMessage} />
   }
 }
 
@@ -23,7 +23,7 @@ RepoCreateContainer.propTypes = {
 };
 
 const mapStateToProps = store => ({
-  successMessage: store.commitState.successMessage,
+  successMessage: store.commitState.successMessage
 });
 
 export default connect(mapStateToProps)(RepoCreateContainer);

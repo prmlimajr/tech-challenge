@@ -45,6 +45,10 @@ INSTALLED_APPS = [
     'webpack_loader',
     'common.apps.CommonConfig',
     'repositories.apps.RepositoriesConfig',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
 ]
 
 MIDDLEWARE = [

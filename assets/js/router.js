@@ -27,7 +27,6 @@ export default (
                     </Switch>
                 </div>
             </div>
-
         </div>
     </Router>
 );
