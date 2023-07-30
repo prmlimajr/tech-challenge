@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {Field, reduxForm} from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import * as types from '../actions/ActionTypes';
 
 const renderField = ({
   input, placeholder, className, type, meta: {touched, error, invalid},
@@ -34,12 +36,21 @@ const RepoCreateForm = (props) => {
   const {
     successMessage, handleSubmit, pristine, submitting,
   } = props;
+
+  const dispatch = useDispatch();
+
+  const handleCloseMessage = () => {
+    dispatch({ type: types.CLOSE_MESSAGE});
+  }
+
   return (
     <div>
       {successMessage
         && (
-          <div className="alert alert-success" role="alert">
+          <div className="alert alert-success" role="alert" style={{ display: 'flex', justifyContent: 'space-between'}}>
             Repository added successfully!
+
+            <span onClick={() => handleCloseMessage()} style={{ cursor: 'pointer'}}>close</span>
           </div>
         )}
       <form onSubmit={handleSubmit}>

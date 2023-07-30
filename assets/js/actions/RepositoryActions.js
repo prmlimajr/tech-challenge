@@ -9,3 +9,7 @@ export const createRepositorySuccess = (response, successMessage) => ({
   type: types.CREATE_REPOSITORY_SUCCESS,
   payload: {response, successMessage},
 });
+
+export const closeMessage = () => ({
+  type: types.CLOSE_MESSAGE
+})

@@ -14,6 +14,5 @@ export const createRepository = (values, headers, formDispatch) => axios.post('/
 
 export const getRepositories = () => axios.get('/api/repositories')
   .then((response) => {
-    console.log({ response })
     store.dispatch(getRepositoriesSuccess({...response.data}));
   });

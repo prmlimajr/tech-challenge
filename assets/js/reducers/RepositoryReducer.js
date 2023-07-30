@@ -21,6 +21,13 @@ const repositoryReducer = (state = initialState, action) => {
       }
     }
 
+    case types.CLOSE_MESSAGE: {
+      return {
+        ...state,
+        successMessage: false
+      }
+    }
+
     default:
       return state;
   }
