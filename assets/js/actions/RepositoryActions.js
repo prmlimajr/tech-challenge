@@ -13,3 +13,8 @@ export const createRepositorySuccess = (response, successMessage) => ({
 export const closeMessage = () => ({
   type: types.CLOSE_MESSAGE
 })
+
+export const setLoading = (loading) => ({
+  type: types.REPOSITORIES_PENDING,
+  payload: {loading},
+})

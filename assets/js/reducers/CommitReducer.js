@@ -6,11 +6,19 @@ const initialState = {
     next: null,
     previous: null,
     results: []
-  }
+  },
+  loading: false,
 };
 
 const commitReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.COMMITS_PENDING: {
+      return {
+        ...state,
+        loading: action.payload.loading,
+      }
+    }
+
     case types.GET_COMMITS_SUCCESS:
       return {
         ...state,

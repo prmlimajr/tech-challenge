@@ -3,14 +3,22 @@ import * as types from '../actions/ActionTypes';
 const initialState = {
   repositories: [],
   successMessage: false,
+  loading: false
 };
 
 const repositoryReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.REPOSITORIES_PENDING: {
+      return {
+        ...state,
+        loading: action.payload.loading,
+      }
+    }
+
     case types.CREATE_REPOSITORY_SUCCESS: {
       return {
         ...state,
-        successMessage: action.payload.successMessage
+        successMessage: action.payload.successMessage,
       };
     }
 

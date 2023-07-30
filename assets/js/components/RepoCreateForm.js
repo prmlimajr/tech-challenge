@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Field, reduxForm} from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,6 +38,7 @@ const RepoCreateForm = (props) => {
   } = props;
 
   const dispatch = useDispatch();
+  const { loading } = useSelector(state => state.repositoryState);
 
   const handleCloseMessage = () => {
     dispatch({ type: types.CLOSE_MESSAGE});
@@ -65,8 +66,8 @@ const RepoCreateForm = (props) => {
             />
           </div>
           <div className="col-2">
-            <button disabled={pristine || submitting} className="btn btn-block btn-primary" type="submit">
-              Submit
+            <button disabled={pristine || submitting || loading} className="btn btn-block btn-primary" type="submit">
+              {loading ? 'Loading' : 'Submit'}
             </button>
           </div>
         </div>

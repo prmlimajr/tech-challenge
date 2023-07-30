@@ -1,31 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { useSelector } from 'react-redux';
 import * as commitAPI from '../api/CommitAPI';
 import CommitList from '../components/CommitList';
 
-class CommitListContainer extends React.Component {
-  componentDidMount() {
+const CommitListContainer = () => {
+  useEffect(() => {
     commitAPI.getCommits();
-  }
+  }, []);
 
-  render() {
-    const {commits} = this.props;
+  const { commits } = useSelector(state => state.commitState);
 
-    return (
-      <div>
-        <CommitList commits={commits} />
-      </div>
-    );
-  }
+  return <CommitList commits={commits} />
 }
 
 CommitListContainer.propTypes = {
   commits: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = store => ({
-  commits: store.commitState.commits,
-});
-
-export default connect(mapStateToProps)(CommitListContainer);
+export default CommitListContainer;
