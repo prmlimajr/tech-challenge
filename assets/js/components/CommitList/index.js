@@ -1,8 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { CommitCard } from '../CommitCard';
+import { useSelector } from 'react-redux';
 
-const CommitList = (props) => {
-  const {commits} = props;
+const CommitList = () => {
+  const { commits } = useSelector(state => state.commitState);
+
   return (
     <div>
       {commits.results.length !== 0 && (
@@ -14,30 +16,11 @@ const CommitList = (props) => {
 
             <div className="card-body">
               {commits.results.map((commit, index) => (
-                <div key={commit.sha}>
-                  <div className="avatar">
-                    <img alt={commit.author} className="img-author" src={commit.avatar} />
-                  </div>
-                  <div className="commit-details">
-                    <p>
-                      {commit.message}
-                    </p>
-                    <small className="text-muted">
-                      {commit.author}
-                      {' '}
-                      authored
-                      {' '}
-                      on
-                      {' '}
-                      {commit.repository}
-                      {' '}
-                      at
-                      {' '}
-                      {commit.date}
-                    </small>
-                    {index !== commits.length - 1 && <hr />}
-                  </div>
-                </div>
+                <React.Fragment>
+                  <CommitCard key={index} commit={commit} />
+
+                  {index !== commits.length - 1 && <hr />}
+                </React.Fragment>
               ))}
             </div>
           </div>
@@ -45,10 +28,6 @@ const CommitList = (props) => {
       )}
     </div>
   );
-};
-
-CommitList.propTypes = {
-  commits: PropTypes.object.isRequired,
 };
 
 export default CommitList;
