@@ -1,0 +1,11 @@
+.is_selected {
+    color: #fff;
+}
+
+.repo_name {
+    color: #999
+}
+
+.repo_name:hover {
+    color: #fff;
+}

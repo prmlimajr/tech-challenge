@@ -11,6 +11,7 @@ class CommitListContainer extends React.Component {
 
   render() {
     const {commits} = this.props;
+
     return (
       <div>
         <CommitList commits={commits} />
@@ -20,7 +21,7 @@ class CommitListContainer extends React.Component {
 }
 
 CommitListContainer.propTypes = {
-  commits: PropTypes.arrayOf(PropTypes.object).isRequired,
+  commits: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = store => ({

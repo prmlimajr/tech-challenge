@@ -1,8 +1,13 @@
 import * as types from '../actions/ActionTypes';
 
 const initialState = {
-  commits: [],
-  successMessage: false,
+  commits: {
+    count: 0,
+    next: null,
+    previous: null,
+    results: []
+  },
+  successMessage: false
 };
 
 const commitReducer = (state = initialState, action) => {
@@ -10,7 +15,7 @@ const commitReducer = (state = initialState, action) => {
     case types.GET_COMMITS_SUCCESS:
       return {
         ...state,
-        commits: Object.values(action.payload),
+        commits: action.payload
       };
 
     default:

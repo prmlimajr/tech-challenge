@@ -14,6 +14,7 @@ class RepoCreateContainer extends React.Component {
 
   render() {
     const {successMessage } = this.props;
+    console.log({ successMessage })
     return <Form onSubmit={this.submit} successMessage={successMessage} />
   }
 }
@@ -23,7 +24,7 @@ RepoCreateContainer.propTypes = {
 };
 
 const mapStateToProps = store => ({
-  successMessage: store.commitState.successMessage
+  successMessage: store.repositoryState.successMessage
 });
 
 export default connect(mapStateToProps)(RepoCreateContainer);
