@@ -3,10 +3,13 @@ import store from '../store';
 import {
   getCommitsSuccess, setLoading,
 } from '../actions/CommitActions';
+import { setPage } from '../actions/PageActions';
 
-export const getCommits = () => axios.get(`/api/commits/`)
+export const getCommits = (page) => axios.get(`/api/commits/?page=${page}`)
   .then((response) => {
     store.dispatch(setLoading(true));
+
+    store.dispatch(setPage(page));
 
     store.dispatch(getCommitsSuccess({...response.data}));
   }).catch((error) => {

@@ -6,3 +6,5 @@ export const CLOSE_MESSAGE = 'CLOSE_MESSAGE';
 
 export const COMMITS_PENDING = 'COMMITS_PENDING';
 export const REPOSITORIES_PENDING = 'REPO_PENDING';
+
+export const SELECT_PAGE = 'SELECT_PAGE';

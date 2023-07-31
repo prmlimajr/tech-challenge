@@ -5,7 +5,7 @@ export function CommitCard({ commit }) {
   return (
     <div>
       <div className="avatar">
-        <img alt={commit.author} className="img-author" src={commit.avatar} />
+        {commit.avatar && <img alt={commit.author} className="img-author" src={commit.avatar} />}
       </div>
 
       <div className="commit-details">

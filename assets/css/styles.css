@@ -1,0 +1,27 @@
+.page {
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.page-selected {
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.blocked {
+    cursor: not-allowed;
+}
+
+.page-container {
+    margin: 0 8px;
+}
+
+.page-container-selected {
+    padding: 0 8px;
+    background-color: #eee;
+    border-radius: 4px;
+}

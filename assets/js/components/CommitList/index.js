@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 const CommitList = () => {
   const { commits } = useSelector(state => state.commitState);
-
+console.log({ commits })
   return (
     <div>
       {commits.results.length !== 0 && (

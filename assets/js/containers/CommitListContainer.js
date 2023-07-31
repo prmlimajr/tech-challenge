@@ -4,7 +4,7 @@ import CommitList from '../components/CommitList';
 
 const CommitListContainer = () => {
   useEffect(() => {
-    commitAPI.getCommits();
+    commitAPI.getCommits(1);
   }, []);
 
   return <CommitList />

@@ -15,7 +15,7 @@ const Sidebar = () => {
 
   const handleResetFilters = () => {
     setSelectedRepository('');
-    getCommits();
+    getCommits(1);
   }
 
   return (

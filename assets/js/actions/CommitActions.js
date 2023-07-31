@@ -8,4 +8,4 @@ export const getCommitsSuccess = commits => ({
 export const setLoading = (loading) => ({
   type: types.COMMITS_PENDING,
   payload: {loading},
-})
+});

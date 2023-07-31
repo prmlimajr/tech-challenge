@@ -5,6 +5,7 @@ import {
 import CommitListContainer from './containers/CommitListContainer';
 import RepoCreateContainer from './containers/RepoCreateContainer';
 import Sidebar from './components/Sidebar';
+import { Pagination } from './components/Pagination';
 
 export default (
     <Router>
@@ -19,6 +20,8 @@ export default (
                     <Switch>
                         <Route path="/" exact component={CommitListContainer} />
                     </Switch>
+
+                    <Pagination />
                 </div>
             </div>
         </div>

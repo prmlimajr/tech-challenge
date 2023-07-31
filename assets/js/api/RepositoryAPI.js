@@ -16,7 +16,7 @@ export const createRepository = (values, headers, formDispatch) => axios.post('/
     console.log(err);
   }).finally(() => {
     getRepositories();
-    getCommits();
+    getCommits(1);
   });
 
 export const getRepositories = () => axios.get('/api/repositories')

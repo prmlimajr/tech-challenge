@@ -26,7 +26,10 @@ class CommitView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generi
                 author = commit['commit']['author']['name']
                 date_str = commit['commit']['author']['date']
                 url = commit['url']
-                avatar = commit['author']['avatar_url']
+                avatar = ''
+
+                if commit['author'] != None :
+                    avatar = commit['author']['avatar_url']
 
                 date = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%SZ')
 
@@ -77,8 +80,10 @@ class RepositoryView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Ge
         serializer.is_valid(raise_exception=True)
         repository_name = serializer.validated_data.get('name')
         user = request.user
-        remote_repository = GithubAPI().find_repository(user, repository_name)
-        remote_commits = GithubAPI().get_commits(user, repository_name)
+        github_api = GithubAPI()
+        remote_repository = github_api.find_repository(user, repository_name)
+        remote_commits = github_api.get_commits(user, repository_name)
+
         commit_view = CommitView()
 
         try:
