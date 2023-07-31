@@ -25,3 +25,14 @@
     background-color: #eee;
     border-radius: 4px;
 }
+
+.missing-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 35px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
