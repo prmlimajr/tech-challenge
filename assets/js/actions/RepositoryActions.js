@@ -5,9 +5,9 @@ export const getRepositoriesSuccess = repositories => ({
   payload: repositories,
 });
 
-export const createRepositorySuccess = (response, successMessage) => ({
+export const createRepositorySuccess = (successMessage) => ({
   type: types.CREATE_REPOSITORY_SUCCESS,
-  payload: {response, successMessage},
+  payload: {successMessage},
 });
 
 export const closeMessage = () => ({
@@ -18,3 +18,8 @@ export const setLoading = (loading) => ({
   type: types.REPOSITORIES_PENDING,
   payload: {loading},
 })
+
+export const setErrorMessage = (errorMessage) => ({
+  type: types.ERROR_MESSAGE,
+  payload: { errorMessage },
+});

@@ -8,3 +8,5 @@ export const COMMITS_PENDING = 'COMMITS_PENDING';
 export const REPOSITORIES_PENDING = 'REPO_PENDING';
 
 export const SELECT_PAGE = 'SELECT_PAGE';
+
+export const ERROR_MESSAGE = 'ERROR_MESSAGE';

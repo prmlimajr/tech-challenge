@@ -2,6 +2,7 @@ from rest_framework import mixins, generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from datetime import datetime
+from django.db import transaction
 
 from .models import Commit, Repository
 from .serializers import CommitSerializer, RepositorySerializer
@@ -45,7 +46,7 @@ class CommitView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generi
 
                 commit_instance.save()
 
-            return Response({ "message": "created"}, status=status.HTTP_201_CREATED)
+            return Response({ "message": "Commits added successfully!"}, status=status.HTTP_201_CREATED)
 
         except Exception as error:
             return Response({"error": "Failed to store commits. Please try again."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -81,35 +82,32 @@ class RepositoryView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Ge
         repository_name = serializer.validated_data.get('name')
         user = request.user
         github_api = GithubAPI()
-        remote_repository = github_api.find_repository(user, repository_name)
-        remote_commits = github_api.get_commits(user, repository_name)
-
-        commit_view = CommitView()
 
         try:
+            remote_repository = github_api.find_repository(user, repository_name)
+            remote_commits = github_api.get_commits(user, repository_name)
+
             if 'id' in remote_repository:
                 repository_in_database = self.check_if_repository_is_already_in_database(repository_name)
 
                 if repository_in_database != None:
-                    new_commits = commit_view.check_for_new_commits(user, repository_name, repository_in_database.id)
+                    new_commits = CommitView().check_for_new_commits(user, repository_name, repository_in_database.id)
 
-                    if len(new_commits) == 0:
+                    if not new_commits:
                         return Response({"message": "Repository and it's commits already exists at the database."}, status=status.HTTP_200_OK)
 
-                    commit_view.store_commits(new_commits, repository_in_database.id)
+                    with transaction.atomic():
+                        CommitView().store_commits(new_commits, repository_in_database.id)
 
-                    return Response({ "message": "created" }, status=status.HTTP_201_CREATED)
+                    return Response({ "message": "New commits from repository added successfuly!" }, status=status.HTTP_201_CREATED)
 
+                with transaction.atomic():
+                    new_repository = Repository.objects.create(name=repository_name)
 
-                new_repository = Repository()
-                new_repository.name = repository_name
+                    if remote_commits:
+                        CommitView().store_commits(remote_commits, new_repository.id)
 
-                new_repository.save()
-
-                if len(remote_commits) > 0:
-                    commit_view.store_commits(remote_commits, new_repository.id)
-
-                return Response({ "message": "created"}, status=status.HTTP_201_CREATED)
+                return Response({ "message": "Repository added successfully!"}, status=status.HTTP_201_CREATED)
 
             return Response({"error": "Repository not found."}, status=status.HTTP_409_CONFLICT)
 

@@ -12,17 +12,20 @@ const RepoCreateContainer = () => {
     return repositoryAPI.createRepository(v, {'X-CSRFToken': token}, dispatch);
   };
 
-  const { successMessage } = useSelector(state => state.repositoryState);
+  const { successMessage, errorMessage } = useSelector(state => state.repositoryState);
 
-  return <Form onSubmit={submit} successMessage={successMessage} />
+  return (
+    <Form
+      onSubmit={submit}
+      successMessage={successMessage}
+      errorMessage={errorMessage}
+    />
+  )
 }
 
-RepoCreateContainer.propTypes = {
-  successMessage: PropTypes.bool.isRequired,
-};
-
 const mapStateToProps = store => ({
-  successMessage: store.repositoryState.successMessage
+  successMessage: store.repositoryState.successMessage,
+  errorMessage: store.repositoryState.errorMessage,
 });
 
 export default connect(mapStateToProps)(RepoCreateContainer);

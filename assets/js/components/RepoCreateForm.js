@@ -34,7 +34,7 @@ renderField.propTypes = {
 
 const RepoCreateForm = (props) => {
   const {
-    successMessage, handleSubmit, pristine, submitting,
+    successMessage, errorMessage, handleSubmit, pristine, submitting,
   } = props;
 
   const dispatch = useDispatch();
@@ -48,12 +48,22 @@ const RepoCreateForm = (props) => {
     <div>
       {successMessage
         && (
-          <div className="alert alert-success" role="alert" style={{ display: 'flex', justifyContent: 'space-between'}}>
-            Repository added successfully!
+          <div className="alert alert-success spaced" role="alert">
+            {successMessage}
 
-            <span onClick={() => handleCloseMessage()} style={{ cursor: 'pointer'}}>close</span>
+            <span onClick={() => handleCloseMessage()} className='clickable'>close</span>
           </div>
         )}
+
+      {errorMessage
+        && (
+          <div className="alert alert-danger spaced" role="alert">
+            {errorMessage}
+
+            <span onClick={() => handleCloseMessage()} className='clickable'>close</span>
+          </div>
+        )}
+
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="col-10">
@@ -80,7 +90,8 @@ RepoCreateForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
-  successMessage: PropTypes.bool.isRequired,
+  successMessage: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string.isRequired
 };
 
 const validate = (values) => {

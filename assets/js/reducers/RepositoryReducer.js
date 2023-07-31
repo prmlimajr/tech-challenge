@@ -2,8 +2,9 @@ import * as types from '../actions/ActionTypes';
 
 const initialState = {
   repositories: [],
-  successMessage: false,
-  loading: false
+  successMessage: '',
+  loading: false,
+  errorMessage: '',
 };
 
 const repositoryReducer = (state = initialState, action) => {
@@ -29,10 +30,18 @@ const repositoryReducer = (state = initialState, action) => {
       }
     }
 
+    case types.ERROR_MESSAGE: {
+      return {
+        ...state,
+        errorMessage: action.payload.errorMessage,
+      }
+    }
+
     case types.CLOSE_MESSAGE: {
       return {
         ...state,
-        successMessage: false
+        successMessage: '',
+        errorMessage: ''
       }
     }
 
