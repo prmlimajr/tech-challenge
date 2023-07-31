@@ -31,36 +31,42 @@ export function Pagination() {
   }
 
   return (
-    <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end'}}>
-      <span
-        onClick={() => commits.previous ? handleSelectPage('prev') : null}
-        className={commits.previous ? 'clickable' : 'blocked'}
-      >
-        {'<'}
-      </span>
-
-      {pageNumbers.map(pageNumber => {
-        return (
-          <div
-            key={pageNumber}
-            className={pageNumber == page ? 'page-container-selected' : 'page-container'}
+    <nav aria-label="..." className='right-aligned'>
+      <ul className="pagination">
+        <li className={commits.previous ? "page-item" : "page-item disabled"}>
+          <span
+            className={commits.previous ? "page-link" : "page-link blocked"}
+            tabindex="-1"
+            onClick={() => commits.previous ? handleSelectPage('prev') : null}
           >
-            <span
-              onClick={() => handleSelectPage(pageNumber)}
-              className={pageNumber == page ? 'page-selected' : 'page'}
-            >
-              {pageNumber}
-            </span>
-          </div>
-        )
-      })}
+            Previous
+          </span>
+        </li>
 
-      <span
-        onClick={() => commits.next ? handleSelectPage('next') : null}
-        className={commits.next ? 'clickable' : 'blocked'}
-      >
-        {'>'}
-      </span>
-    </div>
+        {pageNumbers.map(pageNumber => {
+          return (
+            <li key={pageNumber} className={pageNumber == page ? 'page-item active' : 'page-item'}>
+              <span
+                className='page-link'
+                onClick={() => handleSelectPage(pageNumber)}
+              >
+                {pageNumber}
+
+                {pageNumber == page && <span class="sr-only">(current)</span>}
+              </span>
+            </li>
+          )
+        })}
+
+        <li className={commits.next ? "page-item" : "page-item disabled"}>
+          <span
+            className={commits.next ? "page-link" : "page-link blocked"}
+            onClick={() => commits.next ? handleSelectPage('next') : null}
+          >
+            Next
+          </span>
+        </li>
+      </ul>
+    </nav>
   )
 }
