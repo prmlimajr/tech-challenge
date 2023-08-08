@@ -4,6 +4,6 @@
 [X] Os endpoints de commit e repositório foram implementados usando function based views. Refatore estes endpoints para que usem generic Class Based Views do Django REST Framework.
 [X] Implemente paginação no endpoint de listagem considerando 10 itens por página.
 [ ] Implemente filtragem por repositório e autor do commit no endpoint de listagem. Utilize o django-filter.
-[ ] Implemente a paginação e filtros no frontend, usando as alterações feitas no backend, no requisito anterior.
+[X] Implemente a paginação e filtros no frontend, usando as alterações feitas no backend, no requisito anterior.
 [ ] Para as filtragens, considere que dentro da listagem de commits, deverá ser possível clicar no nome do repositório ou autor e isso levará para uma nova página onde apenas os commits com esses critérios são exibidos.
 [ ] Deve ser possível navegar pelos repositórios com uma barra lateral onde estão listados todos repositórios.

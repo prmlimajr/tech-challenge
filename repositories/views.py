@@ -1,18 +1,22 @@
 from rest_framework import mixins, generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django_filters import rest_framework as filters
 from datetime import datetime
 from django.db import transaction
 
 from .models import Commit, Repository
 from .serializers import CommitSerializer, RepositorySerializer
 from .services.github import GithubAPI
+from .filters import CommitFilter, RepositoryFilter
 
 
 class CommitView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     queryset = Commit.objects.all()
     serializer_class = CommitSerializer
     permission_classes = [IsAuthenticated]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = CommitFilter
 
 
     def get(self, request):
