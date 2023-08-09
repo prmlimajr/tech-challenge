@@ -74,6 +74,8 @@ class RepositoryView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Ge
     queryset = Repository.objects.all()
     serializer_class = RepositorySerializer
     permission_classes = [IsAuthenticated]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = RepositoryFilter
 
 
     def get(self, request):

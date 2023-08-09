@@ -17,5 +17,5 @@ class CommitFilter(filters.FilterSet):
         fields = ["repository", "author"]
 
     def filter_repository(self, queryset, name, value):
-        query = {"repository": value}
+        query = {"repository__name": value}
         return queryset.filter(**query)

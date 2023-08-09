@@ -5,8 +5,6 @@ import { getRepositories } from '../../api/RepositoryAPI';
 import { getCommits } from '../../api/CommitAPI';
 
 const Sidebar = () => {
-  const [selectedRepository, setSelectedRepository] = useState('');
-
   const { repositories } = useSelector((state) => state.repositoryState)
 
   useEffect(() => {
@@ -14,8 +12,11 @@ const Sidebar = () => {
   }, []);
 
   const handleResetFilters = () => {
-    setSelectedRepository('');
     getCommits(1);
+  }
+
+  const handleFilter = (repository) => {
+    getCommits(1, { repository });
   }
 
   return (
@@ -30,7 +31,7 @@ const Sidebar = () => {
             {repositories.map((repository, index) => {
               return (
                 <li key={index} className='sidebar-brand'>
-                  <Link to='/' onClick={() => setSelectedRepository(repository.name)}>
+                  <Link to='/' onClick={() => handleFilter(repository.name)}>
                     {repository.name}
                   </Link>
                 </li>

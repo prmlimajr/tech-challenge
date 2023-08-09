@@ -26,7 +26,7 @@ export const createRepository =
       getCommits(1);
     });
 
-export const getRepositories = () => axios.get('/api/repositories')
+export const getRepositories = () => axios.get(`/api/repositories`)
   .then((response) => {
     store.dispatch(setLoading(true));
 
